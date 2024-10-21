@@ -1,0 +1,18 @@
+.fa-cart-shopping {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  padding: 3px 6px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 0.7em;
+}
+Modal {
+  width: 600px;
+}
