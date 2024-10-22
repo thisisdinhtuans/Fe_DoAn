@@ -69,14 +69,14 @@ const AllCategories = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
 
       console.log("Full response:", response);
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchCategories();
         toast.success("Thêm loại món thành công");
         setNewCategoryName("");
@@ -150,7 +150,7 @@ const AllCategories = () => {
         }
       );
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchCategories();
         toast.success("Cập nhật loại món thành công");
         setEditModalVisible(false);

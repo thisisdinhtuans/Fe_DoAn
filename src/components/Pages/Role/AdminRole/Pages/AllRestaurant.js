@@ -69,19 +69,16 @@ const AllRestaurant = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
 
       console.log("Full response:", response);
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         const newRestaurant = {
-          restaurantID: response.data.restaurantID,
           address: newRestaurantAddress,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
         };
         setRestaurants([newRestaurant, ...restaurants]);
         // await fetchRestaurant();
@@ -147,12 +144,10 @@ const AllRestaurant = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/Restaurants/update?id=${editingRestaurant.restaurantID}`,
+        `http://localhost:5000/api/Restaurants/update`,
         {
           restaurantID: editingRestaurant.restaurantID,
           address: editingRestaurant.address,
-          createdAt: editingRestaurant.createdAt,
-          updatedAt: new Date().toISOString(),
         },
         {
           headers: {
@@ -162,7 +157,7 @@ const AllRestaurant = () => {
         }
       );
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchRestaurant();
         toast.success("Cập nhật cơ sở thành công");
         setEditModalVisible(false);

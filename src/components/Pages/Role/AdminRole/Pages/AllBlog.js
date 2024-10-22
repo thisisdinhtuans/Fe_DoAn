@@ -67,17 +67,18 @@ const AllBlogs = () => {
       formData.append("description", description.trim());
       formData.append("status", true);
       // deloy
-      // const base64Image = await new Promise((resolve) => {
-      //   const reader = new FileReader();
-      //   reader.onloadend = () => {
-      //     resolve(reader.result);
-      //   };
-      //   reader.readAsDataURL(image);
-      // });
-      // formData.append("image", base64Image);
-      formData.append("image", image);
-
+      const base64Image = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsDataURL(image);
+      });
+      formData.append("image", base64Image);
       console.log("Sending blog data:", Object.fromEntries(formData.entries()));
+
+      // formData.append("image", image);
+
 
       const response = await axios.post(
         "http://localhost:5000/api/Blogs/add",
@@ -85,7 +86,8 @@ const AllBlogs = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
           },
         }
       );

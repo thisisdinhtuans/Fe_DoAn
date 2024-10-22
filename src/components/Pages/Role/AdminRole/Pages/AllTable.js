@@ -102,12 +102,13 @@ const AllTable = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
           },
         }
       );
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchTables();
         toast.success("Thêm mới bàn thành công");
         setNewTableNumber("");

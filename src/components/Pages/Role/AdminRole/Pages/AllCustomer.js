@@ -23,7 +23,7 @@ const AllCustomer = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/User/paging",
+        "http://localhost:5000/api/User/get-full-customer",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const AllCustomer = () => {
       );
       console.log("Fetched customer:", response.data);
       if (response.data.isSuccessed) {
-        const filteredCustomer = response.data.resultObj.items
+        const filteredCustomer = response.data.resultObj
           .filter((member) =>
             member.roles.some((role) => ["Customer"].includes(role))
           )
@@ -73,7 +73,7 @@ const AllCustomer = () => {
       console.log(token);
 
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/User/${userId}/ban`,
+        `http://localhost:5000/api/User/${userId}/ban`,
         {},
         {
           headers: {
@@ -120,7 +120,7 @@ const AllCustomer = () => {
     try {
       const token = getToken();
       const response = await axios.get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/User/get-by-id?Id=${userId}`,
+        `http://localhost:5000/api/User/get-by-id?Id=${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

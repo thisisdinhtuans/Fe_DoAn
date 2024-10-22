@@ -90,17 +90,17 @@ const AllArea = () => {
       formData.append("restaurantID", newRestaurantID);
 
       const response = await axios.post(
-        "http://localhost:5000/api/Restaurants/add",
+        "http://localhost:5000/api/Areas/add",
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchAreas();
         toast.success("Thêm mới khu vực thành công");
         setNewAreaName("");
@@ -128,7 +128,7 @@ const AllArea = () => {
           },
         }
       );
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchAreas();
         toast.success("Xóa khu vực thành công");
       } else {
@@ -173,7 +173,7 @@ const AllArea = () => {
         }
       );
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchAreas();
         toast.success("Cập nhật khu vực thành công");
         setEditModalVisible(false);
@@ -278,7 +278,9 @@ const AllArea = () => {
             </div>
             <div className="col-lg-6">
               <Input.Search
+                type="search"
                 placeholder="Tìm khu vực "
+                aria-label="Search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
