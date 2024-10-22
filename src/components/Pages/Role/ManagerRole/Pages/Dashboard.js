@@ -50,7 +50,7 @@ const Dashboard = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get("http://localhost:5000/api/Restaurants", {
+      .get("http://localhost:5000/api/Restaurants/get-full", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

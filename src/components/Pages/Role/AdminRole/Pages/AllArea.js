@@ -26,7 +26,7 @@ const AllArea = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full",
+        "http://localhost:5000/api/Areas/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ const AllArea = () => {
       if (response.data.isSuccessed) {
         let areas = response.data.resultObj;
         if (Array.isArray(areas)) {
-          areas.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          areas.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
           setAreas(areas);
         } else {
           console.error("Unexpected response data format:", areas);
@@ -55,7 +55,7 @@ const AllArea = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full",
+        "http://localhost:5000/api/Restaurants/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const AllArea = () => {
       formData.append("restaurantID", newRestaurantID);
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/add",
+        "http://localhost:5000/api/Restaurants/add",
         formData,
         {
           headers: {
@@ -121,7 +121,7 @@ const AllArea = () => {
     const token = getToken();
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/delete?id=${areaID}`,
+        `http://localhost:5000/api/Areas/delete?id=${areaID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -159,13 +159,11 @@ const AllArea = () => {
 
     try {
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/update?id=${editingArea.areaID}`,
+        `http://localhost:5000/api/Areas/update`,
         {
           areaID: editingArea.areaID,
           areaName: editingArea.areaName,
           restaurantID: editingArea.restaurantID,
-          createdAt: editingArea.createdAt,
-          updatedAt: new Date().toISOString(),
         },
         {
           headers: {

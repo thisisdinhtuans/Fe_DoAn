@@ -27,7 +27,7 @@ const AllTable = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/get-full",
+        "http://localhost:5000/api/Tables/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ const AllTable = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full",
+        "http://localhost:5000/api/Areas/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const AllTable = () => {
       formData.append("numberOfDesk", newQuantityDesk);
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/add",
+        "http://localhost:5000/api/Tables/add",
         formData,
         {
           headers: {
@@ -129,7 +129,7 @@ const AllTable = () => {
     const token = getToken();
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/delete?id=${tableID}`,
+        `http://localhost:5000/api/Tables/delete?id=${tableID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -172,7 +172,7 @@ const AllTable = () => {
 
     try {
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/update?id=${editingTable.tableID}`,
+        `http://localhost:5000/api/Tables/update?id=${editingTable.tableID}`,
         {
           tableID: editingTable.tableID,
           tableNumber: String(editingTable.tableNumber),

@@ -40,7 +40,7 @@ const ManagerProfile = () => {
 
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,7 +76,7 @@ const ManagerProfile = () => {
     const token = localStorage.getItem("SEPtoken");
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full",
+        "http://localhost:5000/api/Restaurants/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ const ManagerProfile = () => {
 
         // Gọi API cập nhật
         await axios.put(
-          `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/update?id=${storedUser.id}`,
+          `http://localhost:5000/api/User/update`,
           updateData,
           {
             headers: {
@@ -195,7 +195,7 @@ const ManagerProfile = () => {
 
         // Sau khi cập nhật thành công, lấy lại thông tin mới
         const response = await axios.get(
-          `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`,
+          `http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

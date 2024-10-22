@@ -23,7 +23,7 @@ const AllRestaurant = () => {
   const fetchRestaurant = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full"
+        "http://localhost:5000/api/Restaurants/get-full"
       );
       console.log("Fetched Restaurant:", response.data);
       if (response.data.isSuccessed) {
@@ -64,7 +64,7 @@ const AllRestaurant = () => {
       console.log("Sending restaurant data:", formData.get("address"));
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/add",
+        "http://localhost:5000/api/Restaurants/add",
         formData,
         {
           headers: {
@@ -106,7 +106,7 @@ const AllRestaurant = () => {
 
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/delete?id=${restaurantId}`,
+        `http://localhost:5000/api/Restaurants/delete?id=${restaurantId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -147,7 +147,7 @@ const AllRestaurant = () => {
 
     try {
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/update?id=${editingRestaurant.restaurantID}`,
+        `http://localhost:5000/api/Restaurants/update?id=${editingRestaurant.restaurantID}`,
         {
           restaurantID: editingRestaurant.restaurantID,
           address: editingRestaurant.address,

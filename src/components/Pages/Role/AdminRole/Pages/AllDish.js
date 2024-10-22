@@ -39,7 +39,7 @@ const AllDish = () => {
     const getCategories = async () => {
       try {
         const response = await axios.get(
-          "https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/get-full"
+          "http://localhost:5000/api/Categories/get-full"
         );
         if (response.data.isSuccessed) {
           const categories = response.data.resultObj;
@@ -70,7 +70,7 @@ const AllDish = () => {
   const fetchDishes = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/get-full"
+        "http://localhost:5000/api/Dish/get-full"
       );
       if (response.data.isSuccessed) {
         const dishes = response.data.resultObj;
@@ -98,7 +98,7 @@ const AllDish = () => {
     const token = getToken();
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/delete?id=${dishId}`,
+        `http://localhost:5000/api/Dish/delete?id=${dishId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -228,7 +228,7 @@ const AllDish = () => {
       console.log("Sending dish data:", Object.fromEntries(formData.entries()));
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/add",
+        "http://localhost:5000/api/Dish/add",
         formData,
         {
           headers: {
@@ -330,7 +330,7 @@ const AllDish = () => {
       console.log("Sending update request with data:", updatedDishData);
 
       const response = await axios.put(
-        `https://localhost:7050/api/Dishs/update?id=${editingDish.dishId}`,
+        `https://localhost:7050/api/Dish/update?id=${editingDish.dishId}`,
         updatedDishData,
         {
           headers: {
@@ -363,7 +363,7 @@ const AllDish = () => {
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentDishs = filteredAndSortedDishes.slice(startIndex, endIndex);
+  const currentDish = filteredAndSortedDishes.slice(startIndex, endIndex);
 
   const confirmDelete = (dishId) => {
     toast.warn(
@@ -379,7 +379,7 @@ const AllDish = () => {
   const handleOpenDetails = async (dishId) => {
     try {
       const response = await axios.get(
-        `https://localhost:7050/api/Dishs/get-by-id?id=${dishId}`
+        `https://localhost:7050/api/Dish/get-by-id?id=${dishId}`
       );
       console.log("API response:", response.data);
       if (response.data && response.status === 200) {
@@ -471,7 +471,7 @@ const AllDish = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentDishs.map((dish, index) => (
+                {currentDish.map((dish, index) => (
                   <tr key={dish.dishId}>
                     <th scope="row">{index + 1}</th>
                     <td>

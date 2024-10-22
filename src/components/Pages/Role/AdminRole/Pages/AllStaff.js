@@ -30,7 +30,7 @@ const AllStaff = () => {
     console.log("Fetching staff with selectedRestaurant:", selectedRestaurant);
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/paging",
+        "http://localhost:5000/api/Staff/get-full",
         {
           params: {
             pageSize: pageSize,
@@ -39,12 +39,13 @@ const AllStaff = () => {
           },
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
       console.log("Fetched staff:", response.data);
       if (response.data.isSuccessed) {
-        const filteredStaff = response.data.resultObj.items
+        const filteredStaff = response.data.resultObj
           .filter((member) =>
             member.roles.some((role) =>
               ["Receptionist", "Waiter", "Manager"].includes(role)
@@ -70,7 +71,7 @@ const AllStaff = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full",
+        "http://localhost:5000/api/Restaurants/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,9 +111,10 @@ const AllStaff = () => {
       const roleMatch = selectedRole
         ? member.roles.includes(selectedRole)
         : true;
-      const restaurantMatch = selectedRestaurant
-        ? member.restaurantID.toString() === selectedRestaurant.toString()
+        const restaurantMatch = selectedRestaurant
+        ? member.restaurantID?.toString() === selectedRestaurant?.toString()
         : true;
+      
       return nameMatch && roleMatch && restaurantMatch;
     });
   };
@@ -151,7 +153,7 @@ const AllStaff = () => {
     }
     try {
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/create",
+        "http://localhost:5000/api/Staff/register",
         {
           ...values,
           gender: values.gender === "true",
@@ -220,7 +222,7 @@ const AllStaff = () => {
 
     try {
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/update?id=${editingStaff.id}`,
+        `http://localhost:5000/api/User/update?id=${editingStaff.id}`,
         {
           email: editingStaff.email,
           fullName: editingStaff.fullName,
@@ -273,7 +275,7 @@ const AllStaff = () => {
       console.log(token);
 
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/${staffId}/ban`,
+        `http://localhost:5000/api/User/${staffId}/ban`,
         {},
         {
           headers: {
@@ -317,7 +319,7 @@ const AllStaff = () => {
     try {
       const token = getToken();
       const response = await axios.get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${staffId}`,
+        `http://localhost:5000/api/User/get-by-id?Id=${staffId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

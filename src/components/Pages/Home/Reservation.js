@@ -100,7 +100,7 @@ const Reservation = () => {
   const fetchRestaurants = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/Restaurants"
+        "http://localhost:5000/api/Restaurants/get-full"
       );
       if (response.data.isSuccessed && Array.isArray(response.data.resultObj)) {
         setRestaurants(response.data.resultObj);

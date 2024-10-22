@@ -28,7 +28,7 @@ const ListTableReservation = () => {
     // Fetch current staff information
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,7 +46,7 @@ const ListTableReservation = () => {
 
     // Fetch all restaurants
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full", {
+      .get("http://localhost:5000/api/Restaurants/get-full", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

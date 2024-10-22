@@ -23,14 +23,14 @@ const AllCategories = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/get-full"
+        "http://localhost:5000/api/Categories/get-full"
       );
       console.log("Fetched categories:", response.data);
       if (response.data.isSuccessed) {
         const categories = response.data.resultObj;
         if (Array.isArray(categories)) {
           categories.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+            (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
           );
           setCategories(categories);
         } else {
@@ -64,7 +64,7 @@ const AllCategories = () => {
       console.log("Sending category data:", formData.get("name"));
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/add",
+        "http://localhost:5000/api/Categories/add",
         formData,
         {
           headers: {
@@ -98,7 +98,7 @@ const AllCategories = () => {
     const token = getToken();
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/delete?id=${categoryId}`,
+        `http://localhost:5000/api/Categories/delete?id=${categoryId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -135,12 +135,12 @@ const AllCategories = () => {
 
     try {
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/update?id=${editingCategory.idCategory}`,
+        `http://localhost:5000/api/Categories/update`,
         {
           idCategory: editingCategory.idCategory,
           name: editingCategory.name,
-          createdAt: editingCategory.createdAt,
-          updatedAt: new Date().toISOString(),
+          // createdAt: editingCategory.createdAt,
+          // updatedAt: new Date().toISOString(),
         },
         {
           headers: {

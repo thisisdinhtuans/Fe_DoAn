@@ -29,7 +29,7 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Blogs/get-full"
+        "http://localhost:5000/api/Blogs/get-full"
       );
       if (response.data.isSuccessed) {
         const blogs = response.data.resultObj;
@@ -65,23 +65,22 @@ const AllBlogs = () => {
       formData.append("title", title.trim());
       formData.append("subTitle", subTitle.trim());
       formData.append("description", description.trim());
-      formData.append("createAtBy", "Admin");
       formData.append("status", true);
-
-      const base64Image = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.readAsDataURL(image);
-      });
-
-      formData.append("image", base64Image);
+      // deloy
+      // const base64Image = await new Promise((resolve) => {
+      //   const reader = new FileReader();
+      //   reader.onloadend = () => {
+      //     resolve(reader.result);
+      //   };
+      //   reader.readAsDataURL(image);
+      // });
+      // formData.append("image", base64Image);
+      formData.append("image", image);
 
       console.log("Sending blog data:", Object.fromEntries(formData.entries()));
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Blogs/add",
+        "http://localhost:5000/api/Blogs/add",
         formData,
         {
           headers: {
@@ -126,13 +125,13 @@ const AllBlogs = () => {
 
     try {
       let updatedBlogData = {
-        idBlog: editingBlog.idBlog,
+        blogID: editingBlog.blogID,
         title: editingBlog.title.trim(),
         subTitle: editingBlog.subTitle.trim(),
         description: editingBlog.description.trim(),
-        createAtBy: editingBlog.createAtBy,
-        createdAt: editingBlog.createdAt,
-        updatedAt: new Date().toISOString(),
+        // createAtBy: editingBlog.createAtBy,
+        // createdAt: editingBlog.createdAt,
+        // updatedAt: new Date().toISOString(),
         image: editingBlog.image,
         status: editingBlog.status,
       };
@@ -151,7 +150,7 @@ const AllBlogs = () => {
       console.log("Sending update request with data:", updatedBlogData);
 
       const response = await axios.put(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Blogs/update?id=${editingBlog.idBlog}`,
+        `http://localhost:5000/api/Blogs/update`,
         updatedBlogData,
         {
           headers: {
@@ -163,7 +162,7 @@ const AllBlogs = () => {
 
       console.log("Update response:", response);
 
-      if (response.data === true) {
+      if (response.data.isSuccessed === true) {
         await fetchBlogs();
         toast.success("Cập nhật bài blog thành công");
         setEditModalVisible(false);
@@ -199,11 +198,11 @@ const AllBlogs = () => {
     setEditModalVisible(true);
   };
 
-  const handleDeleteBlog = async (blogId) => {
+  const handleDeleteBlog = async (blogID) => {
     const token = getToken();
     try {
       const response = await axios.delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Blogs/delete?id=${blogId}`,
+        `http://localhost:5000/api/Blogs/delete?id=${blogID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -236,25 +235,25 @@ const AllBlogs = () => {
   const endIndex = startIndex + pageSize;
   const currentBlogs = filteredBlogs.slice(startIndex, endIndex);
 
-  const confirmDelete = (blogId) => {
+  const confirmDelete = (blogID) => {
     toast.warn(
       <div>
         <p>Bạn có chắc chắn muốn bài blog này?</p>
-        <Button onClick={() => handleDeleteBlog(blogId)}>Xác nhận</Button>
+        <Button onClick={() => handleDeleteBlog(blogID)}>Xác nhận</Button>
         <Button onClick={() => toast.dismiss()}>Hủy</Button>
       </div>,
       { autoClose: 3000, closeOnClick: true, draggable: false }
     );
   };
 
-  const handleOpenDetails = async (blogId) => {
+  const handleOpenDetails = async (blogID) => {
     try {
       const response = await axios.get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Blogs/get-by-id?id=${blogId}`
+        `http://localhost:5000/api/Blogs/get-by-id?id=${blogID}`
       );
       console.log("API response:", response.data);
       if (response.data && response.status === 200) {
-        setCurrentBlogDetails(response.data);
+        setCurrentBlogDetails(response.data.resultObj);
         setDetailsModalVisible(true);
       } else {
         toast.error("Failed to fetch blog details: " + response.data.message);
@@ -364,7 +363,7 @@ const AllBlogs = () => {
               </thead>
               <tbody>
                 {currentBlogs.map((blog, index) => (
-                  <tr key={blog.idBlog}>
+                  <tr key={blog.blogID}>
                     <th scope="row">{index + 1}</th>
                     <td>
                       <img src={blog.image} style={{ width: "60px" }} />
@@ -376,7 +375,7 @@ const AllBlogs = () => {
                         type="button"
                         className="btn btn-info"
                         style={{ marginRight: "10px" }}
-                        onClick={() => handleOpenDetails(blog.idBlog)}
+                        onClick={() => handleOpenDetails(blog.blogID)}
                       >
                         Chi tiết
                       </button>
@@ -391,7 +390,7 @@ const AllBlogs = () => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => confirmDelete(blog.idBlog)}
+                        onClick={() => confirmDelete(blog.blogID)}
                       >
                         Xóa
                       </button>

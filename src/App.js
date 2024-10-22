@@ -74,7 +74,7 @@ function App() {
           <Routes>
             <Route path="/authentication" element={<LoginSignup />} />
             <Route path="/forgetPassword" element={<ForgetPassword />} />
-            <Route path="/resetPassword*" element={<ResetPassword />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="*" element={<NotFound />} />
 
             <Route path="/admin" element={<ProtectedAdminLayout />}>
@@ -88,6 +88,7 @@ function App() {
               <Route path="staff" element={<AllStaff />} />
               <Route path="customer" element={<AllCustomer />} />
               <Route path="changepw" element={<AdminChangePassword />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
 
             <Route path="/manager" element={<ProtectedManagerLayout />}>

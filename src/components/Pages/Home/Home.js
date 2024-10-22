@@ -18,7 +18,7 @@ const Home = () => {
   const fetchBlogs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/Blogs"
+        "http://localhost:5000/api/Blogs/get-full"
       );
       if (response.data.isSuccessed) {
         const blogs = response.data.resultObj;
@@ -481,7 +481,7 @@ const Home = () => {
           <div className="row">
             {currentBlogs.map((blog) => (
               <div
-                key={blog.idBlog}
+                key={blog.blogID}
                 className="col-md-4 wow animate__animated animate__fadeUp"
               >
                 <Link to={`/blogDetails/${blog.blogID}`}>

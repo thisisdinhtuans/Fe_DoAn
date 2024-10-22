@@ -29,9 +29,10 @@ const ListStaff = () => {
     // Fetch current staff information
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         })
         .then((response) => {
@@ -46,9 +47,10 @@ const ListStaff = () => {
     }
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full", {
+      .get("http://localhost:5000/api/Restaurants/get-full", {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       })
       .then((response) => {
@@ -66,10 +68,11 @@ const ListStaff = () => {
     try {
       const token = getToken();
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/paging",
+        "http://localhost:5000/api/Staff/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           params: {
             pageSize: 100,
@@ -126,10 +129,11 @@ const ListStaff = () => {
     try {
       const token = getToken();
       const response = await axios.get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${staffId}`,
+        `http://localhost:5000/api/User/get-by-id?Id=${staffId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );

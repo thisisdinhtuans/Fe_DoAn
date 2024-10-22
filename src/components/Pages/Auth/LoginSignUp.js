@@ -180,6 +180,7 @@ const LoginSignup = () => {
         toast.success("Đăng nhập thành công!");
 
         if (userRole.includes("Admin")) {
+          console.log("Navigating to /admin");
           navigate("/admin");
         } else if (userRole.includes("Manager")) {
           navigate("/manager");
@@ -316,7 +317,7 @@ const LoginSignup = () => {
       };
 
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/User/register",
+        "http://localhost:5000/api/Account/register",
         signupDataWithDob
       );
 

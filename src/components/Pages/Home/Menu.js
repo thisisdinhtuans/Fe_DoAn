@@ -31,7 +31,7 @@ const Menu = () => {
   const fetchDishes = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/Dish"
+        "http://localhost:5000/api/Dish/get-full"
       );
       if (response.data.isSuccessed) {
         const dishes = response.data.resultObj;
@@ -51,7 +51,7 @@ const Menu = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/Dish"
+        "http://localhost:5000/api/Dish/get-full"
       );
       if (response.data.isSuccessed) {
         const categories = response.data.resultObj;
