@@ -64,6 +64,18 @@ const ListStaff = () => {
       });
   }, []);
 
+  // Hàm để xóa dữ liệu trong localStorage và thực hiện đăng xuất
+  const logout = () => {
+    // Xóa mục SEPuser trong localStorage
+    localStorage.removeItem("SEPuser");
+
+    // Nếu muốn xóa tất cả dữ liệu trong localStorage thì dùng:
+    // localStorage.clear();
+
+    // Tải lại trang hoặc chuyển hướng người dùng
+    window.location.reload(); // Hoặc điều hướng đến trang đăng nhập
+  };
+
   const fetchStaff = async (restaurantID) => {
     try {
       const token = getToken();
@@ -84,7 +96,7 @@ const ListStaff = () => {
       );
       console.log("Fetched staff:", response.data);
       if (response.data.isSuccessed) {
-        const filteredStaff = response.data.resultObj.items.filter(
+        const filteredStaff = response.data.resultObj.filter(
           (member) =>
             member.restaurantID === restaurantID &&
             member.roles.some((role) =>
@@ -205,26 +217,31 @@ const ListStaff = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentStaffList.map((member, index) => (
-                  <tr key={member.id}>
-                    <th scope="row">{startIndex + index + 1}</th>
-                    <td>{member.fullName}</td>
-                    <td>{member.userName}</td>
-                    <td>{member.email}</td>
-                    <td>{member.phoneNumber}</td>
-                    <td>{member.roles.join(", ")}</td>
-                    <td>
-                      {" "}
-                      <Button
-                        type="primary"
-                        onClick={() => showStaffDetails(member.id)}
-                      >
-                        Chi tiết
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+  {currentStaffList?.length > 0 ? (
+    currentStaffList.map((member, index) => (
+      <tr key={member.id}>
+        <th scope="row">{startIndex + index + 1}</th>
+        <td>{member.fullName}</td>
+        <td>{member.userName}</td>
+        <td>{member.email}</td>
+        <td>{member.phoneNumber}</td>
+        <td>{member.roles.join(", ")}</td>
+        <td>
+          <Button
+            type="primary"
+            onClick={() => showStaffDetails(member.id)}
+          >
+            Chi tiết
+          </Button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="7">Không có dữ liệu</td>
+    </tr>
+  )}
+</tbody>
             </table>
           )}
         </div>
