@@ -65,7 +65,7 @@ const ListTableReservation = () => {
   const fetchOrders = (restaurantID) => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order", {
+      .get("http://localhost:5000/api/Order/get-all-order", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -206,7 +206,7 @@ const ListTableReservation = () => {
             </thead>
             <tbody>
               {currentOrders.map((order, index) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderId}>
                   <th scope="row">{startIndex + index + 1}</th>
                   <td>{order.userName}</td>
                   <td>{order.phone}</td>
@@ -218,7 +218,7 @@ const ListTableReservation = () => {
                     <button
                       type="button"
                       className="btn btn-info mr-2"
-                      onClick={() => handleViewDetail(order.orderID)}
+                      onClick={() => handleViewDetail(order.orderId)}
                     >
                       Chi tiết
                     </button>

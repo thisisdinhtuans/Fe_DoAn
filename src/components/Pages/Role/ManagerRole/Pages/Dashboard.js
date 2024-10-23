@@ -102,7 +102,7 @@ const Dashboard = () => {
     if (storedUser && storedUser.id) {
       axios
         .get(
-          `https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`,
+          `http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
