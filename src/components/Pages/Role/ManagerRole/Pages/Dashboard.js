@@ -122,7 +122,7 @@ const Dashboard = () => {
 
   const fetchRevenueData = () => {
     const token = getToken();
-    const endpoint = `/Statistics/revenue/statistics`;
+    const endpoint = `/Statistic/revenue/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,
@@ -130,7 +130,7 @@ const Dashboard = () => {
     };
 
     axios
-      .get(`https://projectsep490g64summer24backend.azurewebsites.net/api${endpoint}`, {
+      .get(`http://localhost:5000/api${endpoint}`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -151,7 +151,7 @@ const Dashboard = () => {
 
   const fetchOrderData = () => {
     const token = getToken();
-    const endpoint = `/Statistics/orders/statistics`;
+    const endpoint = `/Statistic/orders/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,
@@ -160,7 +160,7 @@ const Dashboard = () => {
     };
 
     axios
-      .get(`https://projectsep490g64summer24backend.azurewebsites.net/api${endpoint}`, {
+      .get(`http://localhost:5000/api${endpoint}`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ const Dashboard = () => {
 
   const fetchCustomerData = () => {
     const token = getToken();
-    const endpoint = `/Statistics/customer/statistics`;
+    const endpoint = `/Statistic/customer/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,
@@ -191,7 +191,7 @@ const Dashboard = () => {
     };
 
     axios
-      .get(`https://projectsep490g64summer24backend.azurewebsites.net/api${endpoint}`, {
+      .get(`http://localhost:5000/api${endpoint}`, {
         params,
         headers: {
           Authorization: `Bearer ${token}`,

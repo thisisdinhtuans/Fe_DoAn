@@ -39,7 +39,7 @@ const ListReservationReceptionist = () => {
 
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -103,7 +103,7 @@ const ListReservationReceptionist = () => {
     const token = getToken();
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order",
+        "http://localhost:5000/api/Order/get-all-order",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -127,7 +127,7 @@ const ListReservationReceptionist = () => {
 
     // Fetch all restaurants
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full")
+      .get("http://localhost:5000/api/Restaurants/get-full")
       .then((response) => {
         if (response.data.isSuccessed) {
           setRestaurants(response.data.resultObj);
@@ -218,7 +218,7 @@ const ListReservationReceptionist = () => {
           status: 1,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          orderID: 0,
+          orderId: 0,
           priceTotal: 0,
           description: "",
           tableID: 0,
@@ -333,7 +333,7 @@ const ListReservationReceptionist = () => {
             </thead>
             <tbody>
               {currentOrders.map((order, index) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderId}>
                   <th scope="row">{startIndex + index + 1}</th>
                   <td>{order.userName}</td>
                   <td>{order.phone}</td>
@@ -345,7 +345,7 @@ const ListReservationReceptionist = () => {
                     <button
                       type="button"
                       className="btn btn-info"
-                      onClick={() => handleViewDetail(order.orderID)}
+                      onClick={() => handleViewDetail(order.orderId)}
                     >
                       Chi tiết
                     </button>

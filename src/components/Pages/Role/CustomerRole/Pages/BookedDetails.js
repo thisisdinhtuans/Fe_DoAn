@@ -162,7 +162,7 @@ const BookedDetails = () => {
             <p>Cơ sở : {getRestaurantName(order.restaurantID)}</p>
             <p>Trạng thái đơn : {getStatusText(order.status)}</p>
             <p>Số điện thoại: 039 797 0202</p>
-            <p>Email: sep490_g64@gmail.com</p>
+            <p>Email: gocque@gmail.com</p>
           </div>
           <div className="col-lg-4">
             <h5>Khách hàng</h5>

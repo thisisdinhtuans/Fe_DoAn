@@ -27,7 +27,7 @@ const ArrangeTable = () => {
     const token = getToken();
     try {
       const tablesResponse = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/get-full",
+        "http://localhost:5000/api/Tables/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const ArrangeTable = () => {
 
       if (tablesResponse.data.isSuccessed) {
         const areasResponse = await axios.get(
-          "https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full",
+          "http://localhost:5000/api/Areas/get-full",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const ArrangeTable = () => {
 
         // Fetch all orders
         const ordersResponse = await axios.get(
-          "https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order",
+          "http://localhost:5000/api/Order/get-all-order",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ const ArrangeTable = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full")
+      .get("http://localhost:5000/api/Restaurants/get-full")
       .then((response) => {
         if (response.data.isSuccessed) {
           setRestaurants(response.data.resultObj);
@@ -111,7 +111,7 @@ const ArrangeTable = () => {
       });
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full", {
+      .get("http://localhost:5000/api/Areas/get-full", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -172,7 +172,7 @@ const ArrangeTable = () => {
       console.log(token);
 
       const response = await axios.post(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/${orderId}/AssignTable`,
+        `http://localhost:5000/api/Order/${orderId}/AssignTable`,
         {
           tableId: tableId,
         },

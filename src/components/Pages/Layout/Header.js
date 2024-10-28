@@ -55,7 +55,7 @@ const Header = () => {
                 <span className="mailus">Điện thoại:</span>{" "}
                 <a href="#">039 797 0202</a> or{" "}
                 <span className="mailus">Email:</span>{" "}
-                <a href="#">sep490_g64@gmail.com</a>
+                <a href="#">gocque@gmail.com</a>
               </p>
             </div>
             <div className="col-12 col-md d-flex justify-content-md-end">

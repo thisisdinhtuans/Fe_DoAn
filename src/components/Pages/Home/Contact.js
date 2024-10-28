@@ -61,7 +61,7 @@ const Contact = () => {
               <div className="dbox">
                 <p>
                   <span>Email:</span>{" "}
-                  <a href="mailto:info@yoursite.com">sep490_g64@gmail.com</a>
+                  <a href="mailto:info@yoursite.com">gocque@gmail.com</a>
                 </p>
               </div>
             </div>
@@ -69,8 +69,8 @@ const Contact = () => {
               <div className="dbox">
                 <p>
                   <span>Fanpage</span>{" "}
-                  <a href="https://www.facebook.com/SEP490_G64" target="_blank">
-                    fb.com/SEP490_G64
+                  <a href="https://www.facebook.com/gocque" target="_blank">
+                    fb.com/Gocque
                   </a>
                 </p>
               </div>

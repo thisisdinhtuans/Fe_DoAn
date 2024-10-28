@@ -105,7 +105,7 @@ const Footer = () => {
         <div className="container-fluid px-0 bg-primary py-3">
           <div className="row no-gutters">
             <div className="col-md-12 text-center">
-              <p className="mb-0">SEP490_G64</p>
+              <p className="mb-0">GocQue</p>
             </div>
           </div>
         </div>
