@@ -23,7 +23,7 @@ const AcceptstateWaiter = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-by-id?id=${id}`,{
+      .get(`http://localhost:5000/api/Order/get-by-id?id=${id}`,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ const AcceptstateWaiter = () => {
 
     axios
       .get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order-detail-by-orderId?orderId=${id}`,{
+        `http://localhost:5000/api/OrderDetail/get-all-order-detail-by-orderId?orderId=${id}`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -53,12 +53,12 @@ const AcceptstateWaiter = () => {
           details.forEach((detail) => {
             axios
               .get(
-                `https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/get-by-id?id=${detail.dishID}`
+                `http://localhost:5000/api/Dish/get-by-id?id=${detail.dishId}`
               )
               .then((res) => {
                 setDishes((prevDishes) => ({
                   ...prevDishes,
-                  [detail.dishID]: res.data,
+                  [detail.dishId]: res.data,
                 }));
               })
               .catch((error) => {
@@ -78,7 +78,7 @@ const AcceptstateWaiter = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full")
+      .get("http://localhost:5000/api/Restaurants/get-full")
       .then((response) => {
         if (response.data.isSuccessed) {
           setRestaurants(response.data.resultObj);
@@ -89,7 +89,7 @@ const AcceptstateWaiter = () => {
       });
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/get-full",{
+      .get("http://localhost:5000/api/Tables/get-full",{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -104,7 +104,7 @@ const AcceptstateWaiter = () => {
       });
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full",{
+      .get("http://localhost:5000/api/Areas/get-full",{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -150,7 +150,7 @@ const AcceptstateWaiter = () => {
     const token = getToken();
     axios
       .delete(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/${id}/orderDetails/${detailId}/dishes/${dishId}`,{
+        `http://localhost:5000/api/Order/${id}/orderDetails/${detailId}/dishes/${dishId}`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -223,7 +223,7 @@ const AcceptstateWaiter = () => {
 
   const totalPrice = orderDetails.reduce(
     (sum, detail) =>
-      sum + (dishes[detail.dishID]?.price || 0) * detail.quantity,
+      sum + (dishes[detail.dishId]?.price || 0) * detail.quantity,
     0
   );
 
@@ -277,11 +277,11 @@ const AcceptstateWaiter = () => {
               </thead>
               <tbody style={{ textAlign: "center" }}>
                 {orderDetails.map((detail, index) => {
-                  const dish = dishes[detail.dishID] || {};
+                  const dish = dishes[detail.dishId] || {};
                   return (
-                    <tr key={detail.dishID}>
+                    <tr key={detail.dishId}>
                       <td>{index + 1}</td>
-                      <td style={{textAlign:'left'}}>{dish.name || detail.dishID}</td>
+                      <td style={{textAlign:'left'}}>{dish.name || detail.dishId}</td>
                       <td style={{textAlign:'left'}}>{dish.categoryName || ""}</td>
                       <td>
                         {detail.quantity} {dish.type}
@@ -294,7 +294,7 @@ const AcceptstateWaiter = () => {
                           type="button"
                           className="btn btn-danger"
                           onClick={() =>
-                            handleDeleteDish(detail.id, detail.dishID)
+                            handleDeleteDish(detail.id, detail.dishId)
                           }
                         >
                           Xóa

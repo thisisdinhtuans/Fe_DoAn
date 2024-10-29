@@ -25,7 +25,7 @@ const ChooseDish = () => {
   const fetchDishes = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/get-full"
+        "http://localhost:5000/api/Dish/get-full"
       );
       if (response.data.isSuccessed) {
         const dishes = response.data.resultObj;
@@ -45,7 +45,7 @@ const ChooseDish = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Categories/get-full"
+        "http://localhost:5000/api/Categories/get-full"
       );
       if (response.data.isSuccessed) {
         const categories = response.data.resultObj;
@@ -72,7 +72,7 @@ const ChooseDish = () => {
     const fetchCurrentOrder = async () => {
       try {
         const response = await axios.get(
-          `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-by-id?id=${id}`,
+          `http://localhost:5000/api/Order/get-by-id?id=${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -125,28 +125,21 @@ const ChooseDish = () => {
 
     try {
       const orderDetails = cart.map((item) => ({
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        orderID: parseInt(id),
+        orderId: parseInt(id),
         price: item.price,
         description: item.description || "string",
-        dishID: item.dishId,
-        date: currentOrder.date,
+        dishId: item.dishId,
         numberOfCustomer: currentOrder.numberOfCustomer || 0,
-        tableID: currentOrder.tableID || 0,
-        payment: 0,
         quantity: item.quantity,
-        id: 0,
-        tableNumber: currentOrder.tableID || 0,
       }));
 
       const requestBody = {
-        orderID: parseInt(id),
+        orderId: parseInt(id),
         orderDetails: orderDetails,
       };
 
-      const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Order/update-order-details",
+      const response = await axios.put(
+        "http://localhost:5000/api/OrderDetail/update-order-details",
         requestBody,
         {
           headers: {

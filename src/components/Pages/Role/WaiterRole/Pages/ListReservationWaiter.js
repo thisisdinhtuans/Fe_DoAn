@@ -27,7 +27,7 @@ const ListReservationWaiter = () => {
     // Fetch current staff information
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ const ListReservationWaiter = () => {
 
     // Fetch all restaurants
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full", {
+      .get("http://localhost:5000/api/Restaurants/get-full", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +64,7 @@ const ListReservationWaiter = () => {
   const fetchOrders = (restaurantID) => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order", {
+      .get("http://localhost:5000/api/Order/get-all-order", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -187,7 +187,7 @@ const ListReservationWaiter = () => {
             </thead>
             <tbody>
               {currentOrders.map((order, index) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderId}>
                   <th scope="row">{startIndex + index + 1}</th>
                   <td>{order.userName}</td>
                   <td>{order.phone}</td>
@@ -199,7 +199,7 @@ const ListReservationWaiter = () => {
                     <button
                       type="button"
                       className="btn btn-info"
-                      onClick={() => handleViewDetail(order.orderID)}
+                      onClick={() => handleViewDetail(order.orderId)}
                     >
                       Chi tiết
                     </button>

@@ -26,7 +26,7 @@ const OwnerListTableReservation = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order", {
+      .get("http://localhost:5000/api/Order/get-all-order", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -45,7 +45,7 @@ const OwnerListTableReservation = () => {
 
     // Fetch all restaurants
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full")
+      .get("http://localhost:5000/api/Restaurants/get-full")
       .then((response) => {
         if (response.data.isSuccessed) {
           setRestaurants(response.data.resultObj);
@@ -194,7 +194,7 @@ const OwnerListTableReservation = () => {
             </thead>
             <tbody>
               {currentOrders.map((order, index) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderId}>
                   <th scope="row">{startIndex + index + 1}</th>
                   <td>{order.userName}</td>
                   <td>{order.phone}</td>
@@ -207,7 +207,7 @@ const OwnerListTableReservation = () => {
                     <button
                       type="button"
                       className="btn btn-info"
-                      onClick={() => handleViewDetail(order.orderID)}
+                      onClick={() => handleViewDetail(order.orderId)}
                     >
                       Chi tiết
                     </button>

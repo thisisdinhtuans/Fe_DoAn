@@ -42,7 +42,7 @@ const OwnerDashboard = () => {
 
   const fetchRestaurants = () => {
     const token = getToken();
-    const endpoint = `https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full`;
+    const endpoint = `http://localhost:5000/api/Restaurants/get-full`;
     axios
       .get(endpoint, {
         headers: {
@@ -64,7 +64,7 @@ const OwnerDashboard = () => {
   };
 
   const fetchRevenueData = () => {
-    const endpoint = `https://projectsep490g64summer24backend.azurewebsites.net/api/Statistics/revenue/statistics`;
+    const endpoint = `http://localhost:5000/api/Statistic/revenue/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,
@@ -92,7 +92,7 @@ const OwnerDashboard = () => {
   };
 
   const fetchOrderData = () => {
-    const endpoint = `https://projectsep490g64summer24backend.azurewebsites.net/api/Statistics/orders/statistics`;
+    const endpoint = `http://localhost:5000/api/Statistic/orders/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,
@@ -123,7 +123,7 @@ const OwnerDashboard = () => {
   };
 
   const fetchCustomerData = () => {
-    const endpoint = `https://projectsep490g64summer24backend.azurewebsites.net/api/Statistics/customer/statistics`;
+    const endpoint = `http://localhost:5000/api/Statistic/customer/statistics`;
     const params = {
       year: selectedYear,
       month: selectedMonth || null,

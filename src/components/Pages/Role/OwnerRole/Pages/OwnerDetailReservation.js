@@ -21,7 +21,7 @@ const OwnerDetailReservation = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-by-id?id=${id}`,{
+      .get(`http://localhost:5000/api/Order/get-by-id?id=${id}`,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const OwnerDetailReservation = () => {
 
     axios
       .get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/get-all-order-detail-by-orderId?orderId=${id}`,{
+        `http://localhost:5000/api/OrderDetail/get-all-order-detail-by-orderId?orderId=${id}`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +51,7 @@ const OwnerDetailReservation = () => {
           details.forEach((detail) => {
             axios
               .get(
-                `https://projectsep490g64summer24backend.azurewebsites.net/api/Dishs/get-by-id?id=${detail.dishID}`,{
+                `http://localhost:5000/api/Dish/get-by-id?id=${detail.dishId}`,{
                   headers: {
                     Authorization: `Bearer ${token}`,
                   },
@@ -60,7 +60,7 @@ const OwnerDetailReservation = () => {
               .then((res) => {
                 setDishes((prevDishes) => ({
                   ...prevDishes,
-                  [detail.dishID]: res.data,
+                  [detail.dishId]: res.data,
                 }));
               })
               .catch((error) => {
@@ -80,7 +80,7 @@ const OwnerDetailReservation = () => {
   useEffect(() => {
     const token = getToken();
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full")
+      .get("http://localhost:5000/api/Restaurants/get-full")
       .then((response) => {
         if (response.data.isSuccessed) {
           setRestaurants(response.data.resultObj);
@@ -91,7 +91,7 @@ const OwnerDetailReservation = () => {
       });
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Tables/get-full",{
+      .get("http://localhost:5000/api/Tables/get-full",{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -106,7 +106,7 @@ const OwnerDetailReservation = () => {
       });
 
     axios
-      .get("https://projectsep490g64summer24backend.azurewebsites.net/api/Areas/get-full",{
+      .get("http://localhost:5000/api/Areas/get-full",{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -204,11 +204,11 @@ const OwnerDetailReservation = () => {
               </thead>
               <tbody style={{textAlign:'center'}}>
                 {orderDetails.map((detail, index) => {
-                  const dish = dishes[detail.dishID] || {};
+                  const dish = dishes[detail.dishId] || {};
                   return (
-                    <tr key={detail.dishID}>
+                    <tr key={detail.dishId}>
                       <td>{index + 1}</td>
-                      <td style={{textAlign:'left'}}>{dish.name || detail.dishID}</td>
+                      <td style={{textAlign:'left'}}>{dish.name || detail.dishId}</td>
                       <td style={{textAlign:'left'}}>{dish.categoryName || ""}</td>
                       <td>
                         {detail.quantity} {dish.type}

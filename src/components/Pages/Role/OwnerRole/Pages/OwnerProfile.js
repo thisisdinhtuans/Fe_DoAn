@@ -40,7 +40,7 @@ const OwnerProfile = () => {
 
     if (storedUser && storedUser.id) {
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/Staff/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,7 +76,7 @@ const OwnerProfile = () => {
     const token = localStorage.getItem("SEPtoken");
     try {
       const response = await axios.get(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/Restaurants/get-full",
+        "http://localhost:5000/api/Restaurants/get-full",
         {
           headers: {
             Authorization: `Bearer ${token}`,

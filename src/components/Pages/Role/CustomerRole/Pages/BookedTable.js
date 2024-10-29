@@ -13,7 +13,7 @@ const BookedTable = () => {
     if (storedUser && storedUser.id) {
       // Fetch user data
       axios
-        .get(`https://projectsep490g64summer24backend.azurewebsites.net/api/User/get-by-id?Id=${storedUser.id}`, {
+        .get(`http://localhost:5000/api/User/get-by-id?Id=${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -24,7 +24,7 @@ const BookedTable = () => {
 
           // Fetch orders using the user's full name
           return axios.get(
-            `https://projectsep490g64summer24backend.azurewebsites.net/api/Order/ViewOrderHistory/${encodeURIComponent(userData.fullName)}`,
+            `http://localhost:5000/api/Order/ViewOrderHistory/${encodeURIComponent(userData.fullName)}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ const BookedTable = () => {
             </thead>
             <tbody>
               {orders.map((order, index) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderId}>
                   <td>{index + 1}</td>
                   <td>{new Date(order.date).toLocaleDateString()}</td>
                   <td>{order.time}</td>
@@ -88,7 +88,7 @@ const BookedTable = () => {
                   <td>{getStatusText(order.status)}</td>
                   <td>
                     <Link
-                      to={`/customer/bookeddetail/${order.orderID}`}
+                      to={`/customer/bookeddetail/${order.orderId}`}
                       className="btn btn-sm btn-outline-secondary"
                       style={{ borderRadius: "10px" }}
                     >
