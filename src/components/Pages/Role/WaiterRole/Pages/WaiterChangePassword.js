@@ -21,7 +21,7 @@ const WaiterChangePassword = () => {
 
     try {
       const response = await axios.post(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/User/change-password",
+        "http://localhost:5000/api/User/change-password",
         {
           currentPassword,
           newPassword,

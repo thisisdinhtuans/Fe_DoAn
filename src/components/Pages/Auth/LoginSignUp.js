@@ -151,33 +151,24 @@ const LoginSignup = () => {
       );
       console.log("API Response:", response.data);
 
-      if (response.data.token!=null) {
-        // Đăng nhập thành công
-        if (response.data.token) {
-          localStorage.setItem("SEPtoken", response.data.token);
-      } else {
-          console.error("Token không tồn tại trong response");
-      }
-      
-      if (response.data) { // Sửa từ userName thành user
-          localStorage.setItem("SEPuser", JSON.stringify(response.data));
-      } else {
-          console.error("User data không tồn tại trong response");
-      }
-      
+      if (response.data.token) {
+    console.log("Token nhận được:", response.data.token);
+    // Đăng nhập thành công
+    localStorage.setItem("SEPtoken", response.data.token);
+    
+    if (response.data.user) {
+        console.log("Thông tin người dùng:", response.data.user);
+        localStorage.setItem("SEPuser", JSON.stringify(response.data.user));
+    } else {
+        console.error("User data không tồn tại trong response");
+    }
 
-        if (rememberMe) {
-          localStorage.setItem("rememberedUsername", username);
-        } else {
-          localStorage.removeItem("rememberedUsername");
-        }
+    // Giải mã token và lấy role người dùng
+    const decodedToken = jwtDecode(response.data.token);
+    const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    console.log("User Role:", userRole);
 
-        const decodedToken = jwtDecode(response.data.token);
-        const userRole =
-          decodedToken[
-            "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-          ];
-        toast.success("Đăng nhập thành công!");
+    toast.success("Đăng nhập thành công!");
 
         if (userRole.includes("Admin")) {
           console.log("Navigating to /admin");
@@ -246,7 +237,7 @@ const LoginSignup = () => {
     try {
       // Kiểm tra sự tồn tại của username và email
       const checkResponse = await axios.get(
-        `https://projectsep490g64summer24backend.azurewebsites.net/api/User/check-user-exists?userName=${signupData.userName}&email=${signupData.email}`
+        `http://localhost:5000/api/User/check-user-exists?userName=${signupData.userName}&email=${signupData.email}`
       );
 
       if (checkResponse.data.success) {

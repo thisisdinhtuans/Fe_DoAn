@@ -61,7 +61,7 @@ const BookedDetails = () => {
               .then((res) => {
                 setDishes((prevDishes) => ({
                   ...prevDishes,
-                  [detail.dishId]: res.data,
+                  [detail.dishId]: res.data.resultObj,
                 }));
               })
               .catch((error) => {
@@ -168,8 +168,8 @@ const BookedDetails = () => {
             <h5>Khách hàng</h5>
             <p>Tên : {order.userName}</p>
             <p>Số điện thoại: {order.phone}</p>
-            <p>Ngày đặt : 06/06/2024</p>
-            <p>Giờ đặt : {new Date(order.date).toLocaleDateString()}</p>
+            <p>Ngày đặt : {new Date(order.date).toLocaleDateString()}</p>
+            <p>Giờ đặt : {order.time}</p>
             <p>Số người : {order.numberOfCustomer}</p>
           </div>
           <div className="col-lg-4">

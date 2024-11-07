@@ -42,10 +42,10 @@ const Contact = () => {
             <div className="col-md-3 mb-2 d-flex">
               <div className="dbox">
                 <p>
-                  <span>Địa chỉ 1:</span> Khu Công Nghệ Cao Hòa Lạc
+                  <span>Địa chỉ 1:</span> 201 Trung Hòa
                 </p>
                 <p>
-                  <span>Địa chỉ 2:</span> 201 Nguyễn Tuân
+                  <span>Địa chỉ 2:</span> 45 Phạm Văn Bạch
                 </p>
               </div>
             </div>

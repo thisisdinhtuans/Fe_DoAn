@@ -421,11 +421,11 @@ const ReservationDetail = () => {
                               </Select>
                             </Form.Item>
                             <Card size="small" style={{ marginBottom: "16px" }}>
-                              <Text>Chủ TK: PHUNG DUC DUNG</Text>
+                              <Text>Chủ TK: DINH MANH TUAN</Text>
                               <br />
-                              <Text>Số TK: 1902 6437 6070 11</Text>
+                              <Text>Số TK: 5886934568888</Text>
                               <br />
-                              <Text>Ngân hàng: TECHCOMBANK</Text>
+                              <Text>Ngân hàng: MBBANK</Text>
                               <br />
                               <Text type="secondary">
                                 -Quý khách vui lòng chuyển tiền tới số tk trên

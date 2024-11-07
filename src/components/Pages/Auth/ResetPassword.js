@@ -26,7 +26,7 @@ const ResetPassword = () => {
 
     try {
       const response = await fetch(
-        "https://projectsep490g64summer24backend.azurewebsites.net/api/User/renew-password",
+        "http://localhost:5000/api/User/renew-password",
         {
           method: "POST",
           headers: {
